@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>结果 · 动物塑测</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .result-wrap{max-width:720px;margin:20px auto;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px;text-align:center}
+    .animal-emoji{font-size:64px}
+    .scores-table{margin-top:12px;text-align:left;padding:10px;border-radius:8px;background:rgba(255,255,255,0.02)}
+    .btn{padding:10px;border-radius:8px;border:none;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="result-wrap" id="result-root">
+      <h2>测试结果</h2>
+      <div id="result-area">
+        <p>正在加载结果...</p>
+      </div>
+      <div style="margin-top:12px">
+        <button onclick="location.href='quiz.html'" class="btn">重新测试</button>
+        <button onclick="location.href='index.html'" class="btn">返回首页</button>
+      </div>
+    </div>
+  </main>
+  <script src="scripts/quiz-data.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const raw = localStorage.getItem('lastQuizResult');
+      const area = document.getElementById('result-area');
+      if(!raw){
+        area.innerHTML = '<p style="color:#f88">未找到测试结果，请重新完成测评。</p>';
+        return;
+      }
+      const data = JSON.parse(raw);
+      const { result } = data;
+      const animals = window.__ANIMALS || [];
+      const animal = animals.find(a=>a.key === result.key) || {name:result.key,emoji:'❓'};
+      area.innerHTML = `
+        <div class="animal-emoji">${animal.emoji}</div>
+        <h3 style="margin-top:8px">${animal.name}</h3>
+        <p>匹配度评分：${result.score}</p>
+        <div class="scores-table">
+          <strong>详细分数（部分）</strong>
+          <div style="margin-top:8px">
+            ${Object.entries(result.scores).slice(0,10).map(([k,v])=>`<div style="display:flex;justify-content:space-between"><div>${k}</div><div>${v}</div></div>`).join('')}
+          </div>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>

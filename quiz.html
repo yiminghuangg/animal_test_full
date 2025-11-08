@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>测试 · 动物塑测</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .quiz-container{max-width:780px;margin:18px auto;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px}
+    .question{margin:12px 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+    .opt{padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);cursor:pointer}
+    .opt.selected{background:linear-gradient(90deg,#ff7b7b,#ff4d4d);color:#fff}
+    .quiz-footer{display:flex;gap:8px;margin-top:12px}
+    .btn{padding:10px;border-radius:8px;border:none;cursor:pointer}
+  </style>
+</head>
+<body>
+  <main>
+    <div class="quiz-container" id="quiz-root">
+      <h2>测试开始</h2>
+      <div id="auth-check" style="color:#f88;margin-bottom:8px"></div>
+      <div id="quiz-area"></div>
+      <div class="quiz-footer">
+        <button id="prev-btn" class="btn">上一步</button>
+        <button id="next-btn" class="btn">下一步</button>
+        <button id="finish-btn" class="btn" style="margin-left:auto;background:linear-gradient(90deg,#ff6b6b,#ff3b3b);color:#fff">提交并查看结果</button>
+      </div>
+    </div>
+  </main>
+  <script src="scripts/quiz-data.js"></script>
+  <script src="scripts/scoring.js"></script>
+</body>
+</html>

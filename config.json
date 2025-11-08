@@ -1,0 +1,25 @@
+{
+  "platforms": [
+    {
+      "name": "小红书",
+      "logo": "小红书",
+      "url": "https://www.xiaohongshu.com/"
+    },
+    {
+      "name": "闲鱼",
+      "logo": "闲鱼",
+      "url": "https://2.taobao.com/"
+    }
+  ],
+  "navigation": {
+    "xiaohongshuUrl": "https://www.xiaohongshu.com/"
+  },
+  "auth": {
+    "validCodes": [
+      "TEST123",
+      "VIP999",
+      "SAMPLECODE"
+    ],
+    "expiryMinutes": 10
+  }
+}
