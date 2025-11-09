@@ -1,26 +1,26 @@
 // Minimal quiz dataset - 20 animals, 20 questions (sample)
 // Animal keys should match scoring/results mapping
 window.__ANIMALS = [
-  {key:'lion',name:'狮子',emoji:'🦁'},
-  {key:'fox',name:'狐狸',emoji:'🦊'},
-  {key:'parrot',name:'鹦鹉',emoji:'🦜'},
-  {key:'cat',name:'猫',emoji:'🐱'},
   {key:'dog',name:'狗',emoji:'🐶'},
-  {key:'panda',name:'熊猫',emoji:'🐼'},
-  {key:'rabbit',name:'兔子',emoji:'🐰'},
-  {key:'tiger',name:'老虎',emoji:'🐯'},
-  {key:'owl',name:'猫头鹰',emoji:'🦉'},
-  {key:'dolphin',name:'海豚',emoji:'🐬'},
-  {key:'elephant',name:'大象',emoji:'🐘'},
-  {key:'bear',name:'熊',emoji:'🐻'},
-  {key:'horse',name:'马',emoji:'🐴'},
-  {key:'sheep',name:'绵羊',emoji:'🐑'},
-  {key:'monkey',name:'猴子',emoji:'🐵'},
-  {key:'swan',name:'天鹅',emoji:'🦢'},
+  {key:'cat',name:'猫',emoji:'🐱'},
   {key:'wolf',name:'狼',emoji:'🐺'},
-  {key:'koala',name:'树袋熊',emoji:'🐨'},
-  {key:'elephant2',name:'象（变体）',emoji:'🐘'},
-  {key:'penguin',name:'企鹅',emoji:'🐧'}
+  {key:'fox',name:'狐',emoji:'🦊'},
+  {key:'lion',name:'狮',emoji:'🦁'},
+  {key:'bear',name:'熊',emoji:'🐻'},
+  {key:'rabbit',name:'兔',emoji:'🐰'},
+  {key:'hamster',name:'仓鼠',emoji:'🐹'},
+  {key:'swan',name:'天鹅',emoji:'🦢'},
+  {key:'deer',name:'鹿',emoji:'🦌'},
+  {key:'eagle',name:'鹰',emoji:'🦅'},
+  {key:'crow',name:'乌鸦',emoji:'🐦‍⬛'},
+  {key:'capybara',name:'水豚',emoji:'🦫'},
+  {key:'whale',name:'鲸',emoji:'🐋'},
+  {key:'parrot',name:'鹦鹉',emoji:'🦜'},
+  {key:'octopus',name:'章鱼',emoji:'🐙'},
+  {key:'shark',name:'鲨鱼',emoji:'🦈'},
+  {key:'dolphin',name:'海豚',emoji:'🐬'},
+  {key:'raccoon',name:'浣熊',emoji:'🦝'},
+  {key:'meerkat',name:'猫鼬',emoji:'🦡'}
 ];
 
 // Sample 20 questions - each option maps weights to animals (small dataset for demo)
@@ -197,3 +197,5 @@ window.__QUESTIONS = [
     ]
   }
 ];
+
+
