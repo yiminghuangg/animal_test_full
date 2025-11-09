@@ -1,34 +1,461 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="zh-CN">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>测试 · 动物塑测</title>
-  <link rel="stylesheet" href="styles.css" />
-  <style>
-    .quiz-container{max-width:780px;margin:18px auto;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:12px}
-    .question{margin:12px 0;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
-    .options{display:flex;flex-direction:column;gap:8px;margin-top:8px}
-    .opt{padding:10px;border-radius:8px;background:rgba(255,255,255,0.03);cursor:pointer}
-    .opt.selected{background:linear-gradient(90deg,#ff7b7b,#ff4d4d);color:#fff}
-    .quiz-footer{display:flex;gap:8px;margin-top:12px}
-    .btn{padding:10px;border-radius:8px;border:none;cursor:pointer}
-  </style>
-</head>
-<body>
-  <main>
-    <div class="quiz-container" id="quiz-root">
-      <h2>测试开始</h2>
-      <div id="auth-check" style="color:#f88;margin-bottom:8px"></div>
-      <div id="quiz-area"></div>
-      <div class="quiz-footer">
-        <button id="prev-btn" class="btn">上一步</button>
-        <button id="next-btn" class="btn">下一步</button>
-        <button id="finish-btn" class="btn" style="margin-left:auto;background:linear-gradient(90deg,#ff6b6b,#ff3b3b);color:#fff">提交并查看结果</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>动物塑测 · 测试中</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .quiz-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-top: 40px;
+        margin-bottom: 40px;
+      }
+      
+      .quiz-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+      
+      .quiz-header h1 {
+        color: #1a1a1a;
+        margin: 0;
+      }
+      
+      .quiz-progress {
+        height: 8px;
+        background-color: #f0f0f0;
+        border-radius: 4px;
+        margin-bottom: 30px;
+        overflow: hidden;
+      }
+      
+      .progress-bar {
+        height: 100%;
+        background: linear-gradient(90deg, #8A2BE2, #4B0082);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+      }
+      
+      .question-counter {
+        text-align: center;
+        color: #666;
+        margin-bottom: 20px;
+        font-size: 14px;
+      }
+      
+      .question-text {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        line-height: 1.4;
+        text-align: center;
+        color: #1a1a1a;
+      }
+      
+      .options-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .option {
+        padding: 18px 20px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+      }
+      
+      .option:hover {
+        border-color: #8A2BE2;
+        background-color: #f8f5ff;
+      }
+      
+      .option.selected {
+        border-color: #8A2BE2;
+        background-color: #f0e6ff;
+      }
+      
+      .option-label {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        text-align: center;
+        border-radius: 50%;
+        background-color: #f0f0f0;
+        margin-right: 15px;
+        font-weight: 600;
+        color: #555;
+      }
+      
+      .option.selected .option-label {
+        background-color: #8A2BE2;
+        color: white;
+      }
+      
+      .option-text {
+        flex: 1;
+        color: #333;
+        font-weight: 500;
+      }
+      
+      .option.selected .option-text {
+        color: #222;
+        font-weight: 600;
+      }
+      
+      .quiz-navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+      }
+      
+      .nav-button {
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+      
+      .prev-button {
+        background-color: #f0f0f0;
+        color: #555;
+      }
+      
+      .prev-button:hover:not(:disabled) {
+        background-color: #e0e0e0;
+      }
+      
+      .prev-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      .next-button {
+        background: linear-gradient(90deg, #8A2BE2, #4B0082);
+        color: white;
+      }
+      
+      .next-button:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(138, 43, 226, 0.3);
+      }
+      
+      .next-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      
+      .submit-button {
+        background: linear-gradient(90deg, #4CAF50, #2E7D32);
+      }
+      
+      .submit-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(76, 175, 80, 0.3);
+      }
+      
+      .loading {
+        text-align: center;
+        padding: 40px;
+        font-size: 18px;
+        color: #666;
+      }
+      
+      .error-message {
+        text-align: center;
+        padding: 40px;
+        color: #d32f2f;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <div class="nav__brand">
+        <span class="brand__logo">🦊</span>
+        <div class="brand__text">
+          <div class="brand__cn">动物塑测</div>
+          <div class="brand__en">Animal Personality Test</div>
+        </div>
       </div>
-    </div>
-  </main>
-  <script src="scripts/quiz-data.js"></script>
-  <script src="scripts/scoring.js"></script>
-</body>
+      <nav class="nav__links">
+        <a href="index.html" class="nav__link"><span>🏠</span> 首页</a>
+        <a href="#" class="nav__link active"><span>🧪</span> 测试中</a>
+        <a href="#" class="nav__link"><span>📕</span> 小红书主页</a>
+      </nav>
+    </header>
+
+    <main class="main">
+      <div class="quiz-container">
+        <div id="loading" class="loading">正在加载题目...</div>
+        <div id="error" class="error-message" style="display: none;">
+          加载题目失败，请刷新页面重试。
+        </div>
+        <div id="quiz-content" style="display: none;">
+          <div class="quiz-header">
+            <h1>动物性格测试</h1>
+          </div>
+          
+          <div class="quiz-progress">
+            <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
+          </div>
+          
+          <div id="question-counter" class="question-counter">
+            题目 1 / 60
+          </div>
+          
+          <div id="question-text" class="question-text">
+            <!-- 题目将在这里显示 -->
+          </div>
+          
+          <div id="options-container" class="options-container">
+            <!-- 选项将在这里显示 -->
+          </div>
+          
+          <div class="quiz-navigation">
+            <button id="prev-button" class="nav-button prev-button" disabled>上一题</button>
+            <button id="next-button" class="nav-button next-button" disabled>下一题</button>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="scripts/scoring.js"></script>
+    <script>
+      // 授权验证检查
+      (function checkAuth() {
+        // 从localStorage中获取授权状态和配置
+        const authStatus = localStorage.getItem('quizAuthStatus');
+        const authTimestamp = localStorage.getItem('quizAuthTimestamp');
+        const authExpiry = localStorage.getItem('quizAuthExpiry');
+        const now = new Date().getTime();
+        
+        // 默认10分钟有效期，优先使用localStorage中存储的过期时间配置
+        const defaultExpiryMinutes = 10;
+        const expiryMinutes = authExpiry ? parseInt(authExpiry) : defaultExpiryMinutes;
+        const expiryMilliseconds = expiryMinutes * 60 * 1000;
+        
+        // 检查授权状态是否有效且未过期
+        if (!authStatus || authStatus !== 'valid' || 
+            !authTimestamp || (now - parseInt(authTimestamp)) > expiryMilliseconds) {
+          // 未授权或授权已过期，重定向到首页
+          window.location.href = 'index.html';
+        }
+      })();
+      
+      // 测试状态管理
+      const quizState = {
+        questions: [],
+        currentQuestionIndex: 0,
+        answers: {},
+        isLoading: true,
+        error: null
+      };
+
+      // DOM 元素
+      const elements = {
+        loading: document.getElementById('loading'),
+        error: document.getElementById('error'),
+        quizContent: document.getElementById('quiz-content'),
+        progressBar: document.getElementById('progress-bar'),
+        questionCounter: document.getElementById('question-counter'),
+        questionText: document.getElementById('question-text'),
+        optionsContainer: document.getElementById('options-container'),
+        prevButton: document.getElementById('prev-button'),
+        nextButton: document.getElementById('next-button')
+      };
+
+      // 加载题目数据
+      async function loadQuestions() {
+        try {
+          const response = await fetch('questions.json');
+          if (!response.ok) {
+            throw new Error('Failed to load questions');
+          }
+          const questionsData = await response.json();
+          
+          quizState.questions = questionsData.map((q, index) => ({
+            id: index + 1,
+            question: q.text,  // 正确映射 text -> question
+            options: q.options.map((opt, i) => ({
+              value: String.fromCharCode(65 + i),
+              text: opt.text,
+              weights: opt.weights
+            }))
+          }));
+          
+          quizState.isLoading = false;
+          initializeQuiz();
+        } catch (error) {
+          console.error('Error loading questions:', error);
+          quizState.error = error;
+          quizState.isLoading = false;
+          renderError();
+        }
+      }
+
+      // 初始化测试
+      function initializeQuiz() {
+        if (quizState.questions.length === 0) {
+          renderError();
+          return;
+        }
+
+        renderQuestion();
+        updateNavigationButtons();
+        
+        // 显示测试内容
+        elements.loading.style.display = 'none';
+        elements.quizContent.style.display = 'block';
+      }
+
+      // 渲染错误信息
+      function renderError() {
+        elements.loading.style.display = 'none';
+        elements.error.style.display = 'block';
+      }
+
+      // 渲染当前题目
+      function renderQuestion() {
+        const question = quizState.questions[quizState.currentQuestionIndex];
+        
+        const progress = ((quizState.currentQuestionIndex + 1) / quizState.questions.length) * 100;
+        elements.progressBar.style.width = `${progress}%`;
+        
+        elements.questionCounter.textContent = `题目 ${quizState.currentQuestionIndex + 1} / ${quizState.questions.length}`;
+        elements.questionText.textContent = question.question || question.text; // 兼容两种字段名
+        
+        elements.optionsContainer.innerHTML = '';
+        
+        question.options.forEach(option => {
+          const optionElement = document.createElement('div');
+          optionElement.className = 'option';
+          
+          const isSelected = quizState.answers[question.id] === option.value;
+          if (isSelected) {
+            optionElement.classList.add('selected');
+          }
+          
+          optionElement.innerHTML = `
+            <span class="option-label">${option.value}</span>
+            <span class="option-text">${option.text}</span>
+          `;
+          
+          optionElement.addEventListener('click', () => selectOption(question.id, option.value));
+          elements.optionsContainer.appendChild(optionElement);
+        });
+      }
+
+      // 选择选项
+      function selectOption(questionId, optionValue) {
+        quizState.answers[questionId] = optionValue;
+
+        // 增量保存答案到 localStorage，降低意外丢失风险
+        try {
+          localStorage.setItem('quizAnswers', JSON.stringify(quizState.answers));
+        } catch (e) {
+          console.warn('保存答案到 localStorage 失败:', e);
+        }
+
+        // 更新UI
+        const optionElements = elements.optionsContainer.querySelectorAll('.option');
+        optionElements.forEach(element => {
+          const label = element.querySelector('.option-label').textContent;
+          if (label === optionValue) {
+            element.classList.add('selected');
+          } else {
+            element.classList.remove('selected');
+          }
+        });
+        
+        // 检查是否是最后一题
+        if (quizState.currentQuestionIndex === quizState.questions.length - 1) {
+          // 最后一题，启用提交按钮
+          elements.nextButton.disabled = false;
+        } else {
+          // 不是最后一题，直接跳转到下一题
+          setTimeout(() => {
+            goToNextQuestionOrSubmit();
+          }, 300); // 添加短暂延迟，让用户看到选择效果
+        }
+      }
+
+      // 更新导航按钮状态
+      function updateNavigationButtons() {
+        // 上一题按钮
+        elements.prevButton.disabled = quizState.currentQuestionIndex === 0;
+        
+        if (quizState.currentQuestionIndex === quizState.questions.length - 1) {
+          // 最后一题，显示提交按钮，但初始状态为禁用
+          elements.nextButton.style.display = 'block';
+          elements.nextButton.textContent = '提交测试';
+          elements.nextButton.className = 'nav-button submit-button';
+          elements.nextButton.disabled = true;
+        } else {
+          // 显示下一题按钮，但保持禁用状态
+          elements.nextButton.style.display = 'block';
+          elements.nextButton.disabled = true;
+          elements.nextButton.textContent = '下一题';
+          elements.nextButton.className = 'nav-button next-button';
+        }
+      }
+
+      // 上一题
+      function goToPreviousQuestion() {
+        if (quizState.currentQuestionIndex > 0) {
+          quizState.currentQuestionIndex--;
+          renderQuestion();
+          updateNavigationButtons();
+        }
+      }
+
+      // 下一题或提交测试
+      function goToNextQuestionOrSubmit() {
+        if (quizState.currentQuestionIndex < quizState.questions.length - 1) {
+          // 下一题
+          quizState.currentQuestionIndex++;
+          renderQuestion();
+          updateNavigationButtons();
+        } else {
+          // 最后一题，直接提交测试
+          submitQuiz();
+        }
+      }
+
+      // 提交测试
+      function submitQuiz() {
+        // 将答案存储在localStorage中，供结果页面使用
+        localStorage.setItem('quizAnswers', JSON.stringify(quizState.answers));
+        
+        // 跳转到结果页面
+        window.location.href = 'result.html';
+      }
+
+      // 事件监听器
+      elements.prevButton.addEventListener('click', goToPreviousQuestion);
+      elements.nextButton.addEventListener('click', goToNextQuestionOrSubmit);
+
+      // 初始化
+      loadQuestions();
+    </script>
+  </body>
 </html>
+
+
+
+
+

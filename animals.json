@@ -1,0 +1,22 @@
+[
+  {"id":"dog","name":"狗","emoji":"🐶","dims":{"DOM":1,"STR":1,"COM":5,"SOL":0,"AGI":3,"SEC":4,"AES":1}},
+  {"id":"cat","name":"猫","emoji":"🐱","dims":{"DOM":1,"STR":2,"COM":0,"SOL":5,"AGI":4,"SEC":2,"AES":3}},
+  {"id":"wolf","name":"狼","emoji":"🐺","dims":{"DOM":4,"STR":4,"COM":3,"SOL":2,"AGI":2,"SEC":1,"AES":0}},
+  {"id":"fox","name":"狐","emoji":"🦊","dims":{"DOM":1,"STR":5,"COM":0,"SOL":4,"AGI":4,"SEC":1,"AES":1}},
+  {"id":"lion","name":"狮","emoji":"🦁","dims":{"DOM":5,"STR":2,"COM":3,"SOL":3,"AGI":1,"SEC":2,"AES":2}},
+  {"id":"bear","name":"熊","emoji":"🐻","dims":{"DOM":3,"STR":1,"COM":1,"SOL":4,"AGI":0,"SEC":5,"AES":1}},
+  {"id":"rabbit","name":"兔","emoji":"🐰","dims":{"DOM":0,"STR":1,"COM":2,"SOL":3,"AGI":5,"SEC":3,"AES":2}},
+  {"id":"hamster","name":"仓鼠","emoji":"🐹","dims":{"DOM":0,"STR":2,"COM":1,"SOL":5,"AGI":3,"SEC":4,"AES":1}},
+  {"id":"swan","name":"天鹅","emoji":"🦢","dims":{"DOM":2,"STR":3,"COM":2,"SOL":4,"AGI":2,"SEC":1,"AES":5}},
+  {"id":"deer","name":"鹿","emoji":"🦌","dims":{"DOM":0,"STR":2,"COM":3,"SOL":3,"AGI":4,"SEC":2,"AES":4}},
+  {"id":"eagle","name":"鹰","emoji":"🦅","dims":{"DOM":4,"STR":5,"COM":1,"SOL":5,"AGI":3,"SEC":0,"AES":2}},
+  {"id":"crow","name":"乌鸦","emoji":"🐦‍⬛","dims":{"DOM":2,"STR":5,"COM":3,"SOL":2,"AGI":4,"SEC":1,"AES":1}},
+  {"id":"capybara","name":"水豚","emoji":"🦫","dims":{"DOM":0,"STR":1,"COM":5,"SOL":2,"AGI":1,"SEC":4,"AES":3}},
+  {"id":"whale","name":"鲸","emoji":"🐋","dims":{"DOM":3,"STR":4,"COM":2,"SOL":5,"AGI":1,"SEC":3,"AES":4}},
+  {"id":"parrot","name":"鹦鹉","emoji":"🦜","dims":{"DOM":2,"STR":3,"COM":5,"SOL":1,"AGI":4,"SEC":2,"AES":3}},
+  {"id":"octopus","name":"章鱼","emoji":"🐙","dims":{"DOM":2,"STR":5,"COM":1,"SOL":4,"AGI":5,"SEC":2,"AES":2}},
+  {"id":"shark","name":"鲨鱼","emoji":"🦈","dims":{"DOM":5,"STR":3,"COM":0,"SOL":4,"AGI":3,"SEC":1,"AES":1}},
+  {"id":"dolphin","name":"海豚","emoji":"🐬","dims":{"DOM":2,"STR":4,"COM":4,"SOL":2,"AGI":4,"SEC":2,"AES":3}},
+  {"id":"raccoon","name":"浣熊","emoji":"🦝","dims":{"DOM":1,"STR":4,"COM":2,"SOL":3,"AGI":5,"SEC":2,"AES":2}},
+  {"id":"meerkat","name":"猫鼬","emoji":"🦦","dims":{"DOM":1,"STR":2,"COM":4,"SOL":1,"AGI":4,"SEC":3,"AES":2}}
+]

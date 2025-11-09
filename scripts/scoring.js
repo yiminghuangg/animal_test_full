@@ -1,111 +1,47 @@
-// scoring.js - renders quiz, enforces auth, computes results, stores to localStorage
+// 评分与归类工具（维度数量自适应：支持5维或7维）
+// 使用方式：window.Scoring.nearestAnimal(Tscores, animals)
+// Tscores: {维度...} 的标准化分数（建议T分 0-100），animals: 从 animals.json 读取
+
 (function(){
-  function checkAuth(){
-    const status = localStorage.getItem('quizAuthStatus');
-    const ts = Number(localStorage.getItem('quizAuthTimestamp') || 0);
-    const expiry = Number(localStorage.getItem('quizAuthExpiry') || 0);
-    if(status === 'valid' && ts > 0 && expiry > 0){
-      const now = Date.now();
-      const expired = (now - ts) > expiry * 60 * 1000;
-      if(!expired) return true;
-      // expired - clear
-      localStorage.removeItem('quizAuthStatus');
-      localStorage.removeItem('quizAuthTimestamp');
-      localStorage.removeItem('quizAuthExpiry');
-      return false;
-    }
-    return false;
+  function getKeysFrom(Tscores, animals){
+    if(Tscores) return Object.keys(Tscores);
+    if(animals && animals.length && animals[0].dims) return Object.keys(animals[0].dims);
+    return ['O','C','E','A','N'];
   }
 
-  // render quiz only if authorized
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const root = document.getElementById('quiz-root');
-    const authCheck = document.getElementById('auth-check');
-    if(!checkAuth()){
-      authCheck.textContent = '未检测到有效授权，请返回首页获取授权码并激活';
-      // disable controls by hiding area
-      document.getElementById('quiz-area').innerHTML = '<p style="color:#f88">请先在首页点击「开始测试」并输入授权码。</p>';
-      document.getElementById('prev-btn').disabled = true;
-      document.getElementById('next-btn').disabled = true;
-      document.getElementById('finish-btn').disabled = true;
-      return;
+  function cosineSimilarity(a, b, keys){
+    let dot=0, na=0, nb=0;
+    for(const k of keys){ dot += (a[k]||0)*(b[k]||0); na += (a[k]||0)**2; nb += (b[k]||0)**2; }
+    if(na===0 || nb===0) return 0;
+    return dot / (Math.sqrt(na)*Math.sqrt(nb));
+  }
+
+  function nearestAnimal(Tscores, animals){
+    const keys = getKeysFrom(Tscores, animals);
+    let best = null, bestSim = -Infinity, second=null, secondSim=-Infinity;
+    for(const item of animals){
+      const sim = cosineSimilarity(Tscores, item.dims, keys);
+      if(sim > bestSim){ second = best; secondSim = bestSim; best = item; bestSim = sim; }
+      else if(sim > secondSim){ second = item; secondSim = sim; }
     }
+    const mixed = (bestSim - secondSim) < 0.03 ? `${best?.name||''}-${second?.name||''}` : (best?.name||'');
+    return {best, second, bestSim, secondSim, type: mixed};
+  }
 
-    // load questions and animals
-    const QUESTIONS = window.__QUESTIONS || [];
-    const ANIMALS = window.__ANIMALS || [];
-
-    // keep track
-    const answers = new Array(QUESTIONS.length).fill(null);
-    let idx = 0;
-
-    const quizArea = document.getElementById('quiz-area');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const finishBtn = document.getElementById('finish-btn');
-
-    function render(){
-      const q = QUESTIONS[idx];
-      quizArea.innerHTML = `
-        <div class="question">
-          <div style="font-weight:700">${idx+1}. ${q.text}</div>
-          <div class="options">
-            ${q.options.map((o,i)=>`<div class="opt ${answers[idx]===i?'selected':''}" data-i="${i}">${o.text}</div>`).join('')}
-          </div>
-        </div>
-      `;
-      // attach option listeners
-      quizArea.querySelectorAll('.opt').forEach(el=>{
-        el.addEventListener('click', ()=>{
-          const i = Number(el.dataset.i);
-          answers[idx]=i;
-          // mark selected
-          quizArea.querySelectorAll('.opt').forEach(o=>o.classList.remove('selected'));
-          el.classList.add('selected');
-        });
-      });
+  function tScore(scores, norm){
+    const res = {}; const keys = Object.keys(scores||{});
+    for(const k of keys){
+      const mean = norm?.mean?.[k] ?? 30; // 设置默认均值，假设大多数用户在该维度得分约为30
+      const std = norm?.std?.[k] ?? 10;   // 设置默认标准差，允许合理的分数分布
+      const z = ((scores[k]||0) - mean) / std;
+      let t = 50 + 10 * z; // T-score
+      // 确保分数在0-100范围内
+      t = Math.max(0, Math.min(100, t));
+      res[k] = Math.round(t); // 四舍五入到整数
     }
+    return res;
+  }
 
-    function computeResult(){
-      // accumulate scores
-      const scores = {};
-      for(const a of ANIMALS) scores[a.key]=0;
-      for(let qi=0; qi<QUESTIONS.length; qi++){
-        const sel = answers[qi];
-        if(sel===null) continue;
-        const weights = QUESTIONS[qi].options[sel].weights || {};
-        for(const k of Object.keys(weights)){
-          if(!(k in scores)) scores[k]=0;
-          scores[k]+=weights[k];
-        }
-      }
-      // find best
-      const entries = Object.entries(scores).sort((a,b)=>b[1]-a[1]);
-      const top = entries[0];
-      const second = entries[1];
-      const result = { key: top[0], score: top[1], scores, topDiff: top[1] - (second?second[1]:0) };
-      return result;
-    }
-
-    prevBtn.addEventListener('click', ()=>{
-      if(idx>0) { idx--; render(); }
-    });
-    nextBtn.addEventListener('click', ()=>{
-      if(idx < QUESTIONS.length-1) { idx++; render(); }
-    });
-    finishBtn.addEventListener('click', ()=>{
-      // ensure all answered
-      const unanswered = answers.findIndex(a=>a===null);
-      if(unanswered !== -1){
-        if(!confirm(`第 ${unanswered+1} 题未作答，是否仍要提交？`)) return;
-      }
-      const result = computeResult();
-      // save to localStorage for result page
-      localStorage.setItem('lastQuizResult', JSON.stringify({ result, timestamp:Date.now() }));
-      // redirect to result page
-      window.location.href = 'result.html';
-    });
-
-    render();
-  });
+  window.Scoring = { cosineSimilarity, nearestAnimal, tScore };
 })();
+
