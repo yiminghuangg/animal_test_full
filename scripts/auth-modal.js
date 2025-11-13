@@ -87,17 +87,23 @@
       return;
     }
 
-    // 检查是否已使用过
-    const authManager = new AuthCodeManager();
-    if (cfg.auth.allowOneTimeUse && authManager.usedCodes.has(code)) {
-      errorMessage.textContent = '此授权码已被使用';
-      return;
+    // 检查AuthCodeManager是否可用
+    if (typeof AuthCodeManager === 'undefined') {
+      console.error('AuthCodeManager未定义，跳过一次性使用检查');
+    } else {
+      // 检查是否已使用过
+      const authManager = new AuthCodeManager();
+      if (cfg.auth.allowOneTimeUse && authManager.usedCodes.has(code)) {
+        errorMessage.textContent = '此授权码已被使用';
+        return;
+      }
     }
 
     const valid = (cfg.auth && Array.isArray(cfg.auth.validCodes) && cfg.auth.validCodes.map(c=>c.toUpperCase()).includes(code));
     if (valid) {
       // 标记为已使用
-      if (cfg.auth.allowOneTimeUse) {
+      if (cfg.auth.allowOneTimeUse && typeof AuthCodeManager !== 'undefined') {
+        const authManager = new AuthCodeManager();
         authManager.markAsUsed(code);
       }
 
@@ -105,7 +111,7 @@
       localStorage.setItem('quizAuthStatus','valid');
       localStorage.setItem('quizAuthTimestamp', Date.now().toString());
       localStorage.setItem('quizAuthExpiry', expiryMinutes.toString());
-      localStorage.setItem('quizAuthCode', code); // 记录使用的授权码
+      localStorage.setItem('quizAuthCode', code);
       window.location.href = 'quiz.html';
     } else {
       errorMessage.textContent = '授权码无效';
@@ -122,4 +128,5 @@
   // initialize
   init();
 })();
+
 
