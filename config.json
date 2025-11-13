@@ -16,10 +16,11 @@
   },
   "auth": {
     "validCodes": [
-      "TEST123",
-      "VIP999",
-      "SAMPLECODE"
+      "DEMO2025",
+      "TEST1234",
+      "SAMPLE99"
     ],
-    "expiryMinutes": 10
+    "expiryMinutes": 10,
+    "allowOneTimeUse": true
   }
 }

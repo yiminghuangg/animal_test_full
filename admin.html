@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>授权码管理 - 宝石塑测</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { background: #f5f5f5; padding: 20px; border-radius: 8px; }
+        .code-list { background: white; padding: 15px; border-radius: 4px; margin: 10px 0; }
+        .code-item { padding: 8px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; }
+        .btn { padding: 8px 16px; margin: 5px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-success { background: #28a745; color: white; }
+        .btn-danger { background: #dc3545; color: white; }
+        .input-group { margin: 10px 0; }
+        .input-group input { padding: 8px; margin-right: 10px; border: 1px solid #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>授权码管理系统</h1>
+        
+        <div class="input-group">
+            <input type="number" id="batchCount" value="10" min="1" max="100">
+            <button class="btn btn-primary" onclick="generateBatch()">批量生成授权码</button>
+            <button class="btn btn-success" onclick="exportCodes()">导出授权码</button>
+        </div>
+
+        <div class="input-group">
+            <input type="text" id="manualCode" placeholder="手动添加授权码">
+            <button class="btn btn-primary" onclick="addManualCode()">添加</button>
+        </div>
+
+        <div class="code-list" id="codeList">
+            <h3>当前有效授权码</h3>
+            <div id="codes"></div>
+        </div>
+
+        <div class="code-list" id="usedCodeList">
+            <h3>已使用授权码</h3>
+            <div id="usedCodes"></div>
+        </div>
+    </div>
+
+    <script src="scripts/auth-generator.js"></script>
+    <script>
+        const authManager = new AuthCodeManager();
+        let validCodes = [];
+
+        function generateBatch() {
+            const count = parseInt(document.getElementById('batchCount').value) || 10;
+            const newCodes = authManager.generateBatch(count);
+            validCodes.push(...newCodes);
+            updateDisplay();
+            updateConfig();
+        }
+
+        function addManualCode() {
+            const code = document.getElementById('manualCode').value.trim().toUpperCase();
+            if (code && !validCodes.includes(code)) {
+                validCodes.push(code);
+                document.getElementById('manualCode').value = '';
+                updateDisplay();
+                updateConfig();
+            }
+        }
+
+        function removeCode(code) {
+            validCodes = validCodes.filter(c => c !== code);
+            updateDisplay();
+            updateConfig();
+        }
+
+        function updateDisplay() {
+            const codesDiv = document.getElementById('codes');
+            codesDiv.innerHTML = validCodes.map(code => 
+                `<div class="code-item">
+                    <span>${code}</span>
+                    <button class="btn btn-danger" onclick="removeCode('${code}')">删除</button>
+                </div>`
+            ).join('');
+
+            const usedCodesDiv = document.getElementById('usedCodes');
+            const usedCodes = [...authManager.usedCodes];
+            usedCodesDiv.innerHTML = usedCodes.map(code => 
+                `<div class="code-item"><span>${code}</span></div>`
+            ).join('');
+        }
+
+        function updateConfig() {
+            const config = {
+                validCodes: validCodes,
+                expiryMinutes: 10,
+                allowOneTimeUse: true
+            };
+            console.log('更新配置:', config);
+            // 这里可以发送到服务器或更新本地配置
+        }
+
+        function exportCodes() {
+            const text = validCodes.join('\n');
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `auth-codes-${new Date().toISOString().split('T')[0]}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // 初始化
+        updateDisplay();
+    </script>
+</body>
+</html>

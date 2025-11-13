@@ -86,12 +86,26 @@
       errorMessage.textContent = '请输入授权码';
       return;
     }
+
+    // 检查是否已使用过
+    const authManager = new AuthCodeManager();
+    if (cfg.auth.allowOneTimeUse && authManager.usedCodes.has(code)) {
+      errorMessage.textContent = '此授权码已被使用';
+      return;
+    }
+
     const valid = (cfg.auth && Array.isArray(cfg.auth.validCodes) && cfg.auth.validCodes.map(c=>c.toUpperCase()).includes(code));
     if (valid) {
+      // 标记为已使用
+      if (cfg.auth.allowOneTimeUse) {
+        authManager.markAsUsed(code);
+      }
+
       const expiryMinutes = (cfg.auth && cfg.auth.expiryMinutes) || 10;
       localStorage.setItem('quizAuthStatus','valid');
       localStorage.setItem('quizAuthTimestamp', Date.now().toString());
       localStorage.setItem('quizAuthExpiry', expiryMinutes.toString());
+      localStorage.setItem('quizAuthCode', code); // 记录使用的授权码
       window.location.href = 'quiz.html';
     } else {
       errorMessage.textContent = '授权码无效';
@@ -108,3 +122,4 @@
   // initialize
   init();
 })();
+
