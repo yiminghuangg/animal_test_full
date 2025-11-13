@@ -38,7 +38,8 @@
       "Q1R2S3T4", "U5V6W7X8", "Y9Z0A1B2", "C3D4E5F6", "G7H8I9J0"
     ],
     "expiryMinutes": 30,
-    "allowOneTimeUse": true
+    "allowOneTimeUse": false
   }
 }
+
 
