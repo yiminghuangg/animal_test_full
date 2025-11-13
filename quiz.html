@@ -282,15 +282,15 @@
       // 加载题目数据
       async function loadQuestions() {
         try {
-          const response = await fetch('questions.json');
+          const response = await fetch('gem_questions.json');
           if (!response.ok) {
             throw new Error('Failed to load questions');
           }
           const questionsData = await response.json();
           
           quizState.questions = questionsData.map((q, index) => ({
-            id: index + 1,
-            question: q.text,  // 正确映射 text -> question
+            id: q.id || index + 1,
+            question: q.question,
             options: q.options.map((opt, i) => ({
               value: String.fromCharCode(65 + i),
               text: opt.text,
@@ -454,6 +454,8 @@
     </script>
   </body>
 </html>
+
+
 
 
 

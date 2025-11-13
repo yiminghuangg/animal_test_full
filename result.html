@@ -306,20 +306,18 @@
           </div>
           
           <div id="feature-combination" class="feature-combination-section">
-            <h3 class="section-title">特征组合分析</h3>
+            <h3 class="section-title">宝石特质组合分析</h3>
             <div class="combination-content">
               <!-- 特征组合分析将在这里显示 -->
             </div>
           </div>
           
           <div id="animal-archetype" class="animal-archetype-section">
-            <h3 class="section-title">动物原型深度解析</h3>
+            <h3 class="section-title">宝石原型深度解析</h3>
             <div class="archetype-content">
-              <!-- 动物原型深度解析将在这里显示 -->
+              <!-- 宝石原型深度解析将在这里显示 -->
             </div>
           </div>
-          
-
           
           <div class="action-buttons">
             <a href="index.html" class="action-button secondary-button">返回首页</a>
@@ -332,10 +330,10 @@
     <script>
       // Embedded Scoring functionality
       (function(){
-        function getKeysFrom(Tscores, animals){
+        function getKeysFrom(Tscores, items){
           if(Tscores) return Object.keys(Tscores);
-          if(animals && animals.length && animals[0].dims) return Object.keys(animals[0].dims);
-          return ['DOM','STR','COM','SOL','AGI','SEC','AES'];
+          if(items && items.length && items[0].dims) return Object.keys(items[0].dims);
+          return ['rationality','empathy','creativity','stability','energy','independence','sensitivity'];
         }
 
         function cosineSimilarity(a, b, keys){
@@ -345,16 +343,20 @@
           return dot / (Math.sqrt(na)*Math.sqrt(nb));
         }
 
-        function nearestAnimal(Tscores, animals){
-          const keys = getKeysFrom(Tscores, animals);
+        function nearestGem(Tscores, gems){
+          const keys = getKeysFrom(Tscores, gems);
           let best = null, bestSim = -Infinity, second=null, secondSim=-Infinity;
-          for(const item of animals){
+          for(const item of gems){
             const sim = cosineSimilarity(Tscores, item.dims, keys);
             if(sim > bestSim){ second = best; secondSim = bestSim; best = item; bestSim = sim; }
             else if(sim > secondSim){ second = item; secondSim = sim; }
           }
           const mixed = (bestSim - secondSim) < 0.03 ? `${best?.name||''}-${second?.name||''}` : (best?.name||'');
           return {best, second, bestSim, secondSim, type: mixed};
+        }
+
+        function nearestAnimal(Tscores, animals){
+          return nearestGem(Tscores, animals);
         }
 
         function tScore(scores, norm){
@@ -370,7 +372,7 @@
           return res;
         }
 
-        window.Scoring = { cosineSimilarity, nearestAnimal, tScore };
+        window.Scoring = { cosineSimilarity, nearestGem, nearestAnimal, tScore };
       })();
 
       // 结果页面状态
@@ -394,35 +396,26 @@
         featureCombination: document.getElementById('feature-combination'),
         animalArchetype: document.getElementById('animal-archetype')
       };
-
-      // animals.json 的内置兜底数据（与文件内容一致）
-      const FALLBACK_ANIMALS = [
-        {"id":"dog","name":"狗","emoji":"🐶","dims":{"DOM":1,"STR":1,"COM":5,"SOL":0,"AGI":3,"SEC":4,"AES":1}},
-        {"id":"cat","name":"猫","emoji":"🐱","dims":{"DOM":1,"STR":2,"COM":0,"SOL":5,"AGI":4,"SEC":2,"AES":3}},
-        {"id":"wolf","name":"狼","emoji":"🐺","dims":{"DOM":4,"STR":4,"COM":3,"SOL":2,"AGI":2,"SEC":1,"AES":0}},
-        {"id":"fox","name":"狐","emoji":"🦊","dims":{"DOM":1,"STR":5,"COM":0,"SOL":4,"AGI":4,"SEC":1,"AES":1}},
-        {"id":"lion","name":"狮","emoji":"🦁","dims":{"DOM":5,"STR":2,"COM":3,"SOL":3,"AGI":1,"SEC":2,"AES":2}},
-        {"id":"bear","name":"熊","emoji":"🐻","dims":{"DOM":3,"STR":1,"COM":1,"SOL":4,"AGI":0,"SEC":5,"AES":1}},
-        {"id":"rabbit","name":"兔","emoji":"🐰","dims":{"DOM":0,"STR":1,"COM":2,"SOL":2,"AGI":5,"SEC":5,"AES":2}},
-        {"id":"hamster","name":"仓鼠","emoji":"🐹","dims":{"DOM":0,"STR":0,"COM":2,"SOL":4,"AGI":1,"SEC":5,"AES":1}},
-        {"id":"swan","name":"天鹅","emoji":"🦢","dims":{"DOM":2,"STR":1,"COM":2,"SOL":3,"AGI":1,"SEC":2,"AES":5}},
-        {"id":"deer","name":"鹿","emoji":"🦌","dims":{"DOM":1,"STR":1,"COM":3,"SOL":3,"AGI":3,"SEC":4,"AES":4}},
-        {"id":"eagle","name":"鹰","emoji":"🦅","dims":{"DOM":4,"STR":3,"COM":0,"SOL":5,"AGI":2,"SEC":1,"AES":2}},
-        {"id":"crow","name":"乌鸦","emoji":"🐦‍⬛","dims":{"DOM":2,"STR":5,"COM":4,"SOL":2,"AGI":3,"SEC":1,"AES":0}},
-        {"id":"capybara","name":"水豚","emoji":"🦫","dims":{"DOM":0,"STR":0,"COM":5,"SOL":2,"AGI":1,"SEC":5,"AES":2}},
-        {"id":"whale","name":"鲸","emoji":"🐋","dims":{"DOM":2,"STR":3,"COM":4,"SOL":4,"AGI":0,"SEC":2,"AES":4}},
-        {"id":"parrot","name":"鹦鹉","emoji":"🦜","dims":{"DOM":1,"STR":2,"COM":5,"SOL":1,"AGI":5,"SEC":1,"AES":2}},
-        {"id":"octopus","name":"章鱼","emoji":"🐙","dims":{"DOM":2,"STR":5,"COM":0,"SOL":5,"AGI":4,"SEC":1,"AES":1}},
-        {"id":"shark","name":"鲨鱼","emoji":"🦈","dims":{"DOM":5,"STR":3,"COM":0,"SOL":5,"AGI":3,"SEC":0,"AES":0}},
-        {"id":"dolphin","name":"海豚","emoji":"🐬","dims":{"DOM":3,"STR":4,"COM":5,"SOL":0,"AGI":4,"SEC":1,"AES":1}},
-        {"id":"raccoon","name":"浣熊","emoji":"🦝","dims":{"DOM":1,"STR":4,"COM":2,"SOL":3,"AGI":5,"SEC":2,"AES":0}},
-        {"id":"meerkat","name":"猫鼬","emoji":"🦡","dims":{"DOM":2,"STR":3,"COM":5,"SOL":1,"AGI":3,"SEC":5,"AES":0}}
+    
+      // gems.json 的内置兜底数据
+      const FALLBACK_GEMS = [
+        {"id":"qingyu","name":"青玉","emoji":"🟩","desc":"温润如水，内敛却深沉，思维清明而理性。","dims":{"rationality":3,"empathy":1,"creativity":4,"stability":5,"energy":5,"independence":1,"sensitivity":4}},
+        {"id":"chijin","name":"赤金","emoji":"🟧","desc":"烈焰之心，热情炽烈，行动果断而充满能量。","dims":{"rationality":5,"empathy":1,"creativity":5,"stability":0,"energy":5,"independence":0,"sensitivity":5}},
+        {"id":"hupo","name":"琥珀","emoji":"🟠","desc":"包容岁月的柔光，感性而温暖，富有同理心。","dims":{"rationality":2,"empathy":0,"creativity":2,"stability":3,"energy":5,"independence":1,"sensitivity":2}},
+        {"id":"baiyu","name":"白玉","emoji":"🤍","desc":"纯粹明净，追求完美与平衡，稳定而端庄。","dims":{"rationality":3,"empathy":0,"creativity":1,"stability":2,"energy":3,"independence":3,"sensitivity":1}},
+        {"id":"xuantie","name":"玄铁","emoji":"⚫","desc":"坚毅而沉稳，不动如山，力量隐藏于平静之中。","dims":{"rationality":1,"empathy":4,"creativity":3,"stability":0,"energy":3,"independence":5,"sensitivity":5}},
+        {"id":"zijing","name":"紫晶","emoji":"🟣","desc":"灵性与创造并存，心思细腻，洞察人心。","dims":{"rationality":2,"empathy":5,"creativity":1,"stability":1,"energy":0,"independence":4,"sensitivity":4}},
+        {"id":"moyu","name":"墨玉","emoji":"⚫","desc":"深邃神秘，情绪浓烈，独立且富有敏感度。","dims":{"rationality":5,"empathy":2,"creativity":1,"stability":0,"energy":0,"independence":3,"sensitivity":3}},
+        {"id":"qingtong","name":"青铜","emoji":"🟤","desc":"古老而坚韧，责任感强，理智中带有果断。","dims":{"rationality":4,"empathy":0,"creativity":2,"stability":1,"energy":5,"independence":0,"sensitivity":5}},
+        {"id":"chijin2","name":"赤瑾","emoji":"🔴","desc":"真挚热烈，情感饱满，富有感染力。","dims":{"rationality":2,"empathy":2,"creativity":2,"stability":2,"energy":5,"independence":1,"sensitivity":3}},
+        {"id":"lantianshi","name":"蓝田石","emoji":"🟦","desc":"温厚宁静，心性平和，擅长安抚他人。","dims":{"rationality":1,"empathy":2,"creativity":5,"stability":1,"energy":1,"independence":1,"sensitivity":3}},
+        {"id":"yaoshi","name":"曜石","emoji":"⬛","desc":"直觉敏锐，内心深藏力量，善于看透人性。","dims":{"rationality":1,"empathy":2,"creativity":1,"stability":0,"energy":4,"independence":0,"sensitivity":2}},
+        {"id":"lingsha","name":"灵砂","emoji":"✨","desc":"流转如梦，思维跳跃，富有想象与创造力。","dims":{"rationality":1,"empathy":4,"creativity":5,"stability":4,"energy":0,"independence":5,"sensitivity":4}}
       ];
 
       // 加载测试数据并计算结果
       async function loadAndCalculateResult() {
         try {
-          // 从localStorage获取答案
           const storedAnswers = localStorage.getItem('quizAnswers');
           if (!storedAnswers) {
             throw new Error('No answers found');
@@ -430,25 +423,23 @@
           
           resultState.answers = JSON.parse(storedAnswers);
           
-          // 先确保 Chart.js 已加载（本地优先，失败回退至CDN）
           await window.loadChartJs();
 
-          // 加载动物数据（失败使用兜底数据）
-          let animals = null;
+          // 加载宝石数据
+          let gems = null;
           try {
-            const response = await fetch('animals.json');
+            const response = await fetch('gems.json');
             if (response.ok) {
-              animals = await response.json();
+              gems = await response.json();
             } else {
-              throw new Error('Failed to load animals data');
+              throw new Error('Failed to load gems data');
             }
           } catch (e) {
-            console.warn('animals.json 加载失败，使用内置兜底数据:', e);
-            animals = FALLBACK_ANIMALS;
+            console.warn('gems.json 加载失败，使用内置兜底数据:', e);
+            gems = FALLBACK_GEMS;
           }
           
-          // 计算结果
-          calculateResult(animals);
+          calculateResult(gems);
           
           resultState.isLoading = false;
           renderResult();
@@ -461,21 +452,16 @@
       }
 
       // 计算测试结果
-      function calculateResult(animals) {
-        // 检查 Scoring 对象是否存在
+      function calculateResult(gems) {
         if (!window.Scoring || !window.Scoring.tScore) {
           throw new Error('Scoring module not loaded');
         }
         
-        // 将答案转换为维度分数
         const dimensionScores = calculateDimensionScores(resultState.answers);
-        
-        // 计算T分数
         const tScores = window.Scoring.tScore(dimensionScores);
         
-        // 找到最匹配的动物
-        resultState.animalResult = window.Scoring.nearestAnimal(tScores, animals);
-        resultState.animalResult.tScores = tScores;
+        resultState.gemResult = window.Scoring.nearestGem(tScores, gems);
+        resultState.gemResult.tScores = tScores;
       }
 
       // 将答案转换为维度分数
@@ -526,73 +512,21 @@
 
       // 渲染结果
       function renderResult() {
-        const { best, tScores } = resultState.animalResult;
+        const { best, tScores } = resultState.gemResult;
         
-        // 显示动物结果
+        // 显示宝石结果
         elements.animalEmoji.textContent = best.emoji;
         elements.animalName.textContent = best.name;
         
-        // 显示动物类型和描述 - 基于动物类型文件中的核心特质和性格描述
-        const animalTypes = {
-          '狗': '忠诚陪伴型',
-          '猫': '独立优雅型',
-          '狼': '领袖战略型',
-          '狐': '机敏智取型',
-          '狮': '王者自信型',
-          '熊': '沉稳守护型',
-          '兔': '警觉温和型',
-          '仓鼠': '安逸专注型',
-          '天鹅': '优雅理想型',
-          '鹿': '温和纯净型',
-          '鹰': '高傲远见型',
-          '乌鸦': '聪慧社交型',
-          '水豚': '随和社交型',
-          '鲸': '深邃智慧型',
-          '鹦鹉': '活泼社交型',
-          '章鱼': '多面智慧型',
-          '鲨鱼': '专注目标型',
-          '海豚': '智慧协作型',
-          '浣熊': '机灵探索型',
-          '猫鼬': '责任协作型'
-        };
-        
-        const animalDescriptions = {
-          '狗': '你是忠诚的“伙伴”与热情的“守护者”。你的世界因“我们”（家人、朋友、团队）而完整。你天生擅长建立深刻的连接，给予无条件的温暖与支持。你的存在本身就是一种治愈，最大的快乐源于“陪伴”与“被需要”。',
-          '猫': '你是优雅的“独立思考者”，神秘且自我丰盈。你享受高质量的独处，内心世界充实而自足，只为真正触动你内心的人事物驻足。你的魅力不在于讨好，而在于那份“若即若离”的清醒与无法被掌控的灵气。',
-          '狼': '你是天生的“领袖”与“战略家”，兼具孤独的意志与社群的智慧。你既能独立思考，也能为团队无缝协作。目标感极强，为守护心中“领地”而战。你的统御力不来自压迫，而来自那份为集体荣誉而战的决心与谋略。',
-          '狐': '你是机敏的“策略家”与孤独的“观察者”。你拥有惊人的智慧和适应力，总能在复杂环境中找到最优解。你倾向独立行动，用敏锐的洞察力规避风险。你的生存哲学永远是“智取”而非“强攻”，魅力在于总能“四两拨千斤”。',
-          '狮': '你是自信的“王者”，天生自带光环与领袖魅力。你享受成为焦点，习惯被仰望，你的慷慨和气场总能吸引追随者。你无需刻意表现，你的存在本身，就是一种充满力量与威严的宣告。',
-          '熊': '你是沉稳的“守护者”，强大、内敛且平和。大部分时间你安静温和，享受自己的节奏。但当家人或领地受威胁时，你会爆发出不容置疑的绝对力量。你极度重视安全感，最大的满足就是为所爱之人建立一个舒适的“庇护所”。',
-          '兔': '你是警觉的“和平主义者”，敏捷、细腻且富有同情心。你对环境变化极度敏感，这并非胆小，而是你规避风险的天赋。你擅长躲避不必要的冲突。在你熟悉的安全“小圈子”里，你会展现出惊人的活泼与温柔。',
-         '仓鼠': '你是专注的“囤积者”与安逸的“生活家”。你最大的幸福，来自建立一个堆满“安全感”的“小窝”。你热爱收集和整理（无论是物质还是信息），享受在自己的小世界里自得其乐。这份“钝感力”是你幸福的秘诀。',
-         '天鹅': '你是优雅的“理想主义者”，对“美”有着近乎偏执的追求。你的姿态高贵，天生带着疏离感，但内心深处对“唯一”的伴侣和家庭极为忠诚。精神的契合对你而言高于一切，你的高贵在于绝不容忍任何形式的粗俗与“将就”。',
-         '鹿': '你是温和的“自然之子”，敏感、优雅且充满灵性。你对美与宁静有着天生的向往，常沉浸在自己的精神世界。你的警惕性很高，需要绝对安全的环境才能彻底放松。你的魅力在于那份“不染尘埃”的纯净气质。',
-         '鹰': '你是高傲的“远见者”，拥有凌驾一切的“视野”与“决心”。你习惯从高处审视全局，制定长远目标。你享受孤独，因为孤独让你看得更清。你的力量不只在于利爪，更在于你“只忠于自己”的独立意志与宏大格局。',
-        '乌鸦': '你是聪慧的“谜题解决者”与“信息破译者”。你拥有极高的智商和好奇心，善于观察、学习和“使用工具”来解决问题。在他人看来你或许神秘莫测，但这份“神秘感”，恰恰是你用来洞察世界的“智慧保护色”。',
-        '水豚': '你是“情绪稳定”的社交大师，随和、包容，万物皆可为友。你的存在本身，就能给周围带来不可思议的“平静”与“和谐”。你享受社群，但也从不强求。你的“佛系”态度是对世界的最大善意，你的哲学是：“放轻松，一切都会OK”。',
-        '鲸': '你是深海的“哲学家”，古老、智慧且深邃。你承载着厚重的记忆，既能融入庞大的集体，又始终保持着个体的“深邃孤独”。你的内心就像海洋：平静时包容万物，翻涌时则充满不可抗拒的磅礴力量。',
-        '鹦鹉': '你是聪明的“社交达人”与天生的“表演家”。你热爱互动，拥有惊人的学习和模仿能力，是群体中的“开心果”和“信息中心”。你的好奇心永不枯竭，有你的地方从不缺乏戏剧性与欢笑。你的智慧在与世界的灵动交互中闪光。',
-        '章鱼': '你是深海的“智者”与“伪装大师”。你拥有惊人的智慧和解决问题的能力，习惯独立思考。你的每一次“变形”，都是一次精妙的策略展示。你是真正的“多面手”，在任何复杂环境中都能展现极强的适应力与创造力。',
-        '鲨鱼': '你是高效的“目标追逐者”，专注、直接，充满原始的力量。一旦锁定目标，你便会“心无旁骛”地全速前进。你不需要复杂的人际关系，习惯独来独往。你的生存法则纯粹而强大：“永不停止，永不后退”。',
-        '海豚': '你是智慧的“嬉戏者”与“团队合作”的典礼。你拥有高度发达的大脑和复杂的社会行为，充满“玩乐精神”，将生活视为一场有趣的游戏。你的快乐源于“协作”，你最大的天赋，是与同伴一起“探索”这个世界的无限乐趣。',
-        '浣熊': '你是机灵的“都市探险家”与“问题解决”小天才。你好奇心极强，动手能力超群，总能找到规则之外的“捷径”来达成目的。你极其“足智多谋”，总能在看似“不可能”的限制中，找到属于自己的生存空间和乐趣。',
-        '猫鼬': '你是警惕的“哨兵”与“家族”的守护者。你对集体有着极强的“归属感”和“责任心”，时刻为团队的安危“站岗放哨”。你的生存极度依赖高效的“团队协作”与“分工”。你的勇敢不为自己，而是为了“整个族群”的延续。'
-};
-        
-        elements.animalType.textContent = animalTypes[best.name] || '独特个性型';
-        elements.animalDescription.textContent = animalDescriptions[best.name] || '你有独特的个性，无法被简单归类。你拥有多面的性格，能够在不同场合展现不同的一面，是一个复杂而有趣的人。';
+        // 显示宝石描述
+        elements.animalType.textContent = '宝石性格类型';
+        elements.animalDescription.textContent = best.desc || '你拥有独特的性格特质，如同珍贵的宝石般闪闪发光。';
         
         // 渲染维度得分
         renderDimensions(tScores);
         
         // 渲染雷达图
         renderRadarChart(tScores);
-        
-        // 显示特征组合分析
-        renderFeatureCombinations(tScores);
-        
-        // 显示动物原型深度解析
-        renderAnimalArchetype(best.name);
         
         // 显示结果内容
         elements.loading.style.display = 'none';
@@ -602,13 +536,13 @@
       // 渲染维度得分
       function renderDimensions(tScores) {
         const dimensionNames = {
-          'DOM': '支配性',
-          'STR': '力量',
-          'COM': '服从性',
-          'SOL': '社交性',
-          'AGI': '敏捷性',
-          'SEC': '安全感',
-          'AES': '审美'
+          'rationality': '理性',
+          'empathy': '共情',
+          'creativity': '创造力',
+          'stability': '稳定性',
+          'energy': '活力',
+          'independence': '独立性',
+          'sensitivity': '敏感度'
         };
         
         // 各维度的分级话术描述

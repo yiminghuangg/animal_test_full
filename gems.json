@@ -1,0 +1,14 @@
+[
+  {"id":"qingyu","name":"青玉","emoji":"🟩","desc":"温润如水，内敛却深沉，思维清明而理性。","dims":{"rationality":3,"empathy":1,"creativity":4,"stability":5,"energy":5,"independence":1,"sensitivity":4}},
+  {"id":"chijin","name":"赤金","emoji":"🟧","desc":"烈焰之心，热情炽烈，行动果断而充满能量。","dims":{"rationality":5,"empathy":1,"creativity":5,"stability":0,"energy":5,"independence":0,"sensitivity":5}},
+  {"id":"hupo","name":"琥珀","emoji":"🟠","desc":"包容岁月的柔光，感性而温暖，富有同理心。","dims":{"rationality":2,"empathy":0,"creativity":2,"stability":3,"energy":5,"independence":1,"sensitivity":2}},
+  {"id":"baiyu","name":"白玉","emoji":"🤍","desc":"纯粹明净，追求完美与平衡，稳定而端庄。","dims":{"rationality":3,"empathy":0,"creativity":1,"stability":2,"energy":3,"independence":3,"sensitivity":1}},
+  {"id":"xuantie","name":"玄铁","emoji":"⚫","desc":"坚毅而沉稳，不动如山，力量隐藏于平静之中。","dims":{"rationality":1,"empathy":4,"creativity":3,"stability":0,"energy":3,"independence":5,"sensitivity":5}},
+  {"id":"zijing","name":"紫晶","emoji":"🟣","desc":"灵性与创造并存，心思细腻，洞察人心。","dims":{"rationality":2,"empathy":5,"creativity":1,"stability":1,"energy":0,"independence":4,"sensitivity":4}},
+  {"id":"moyu","name":"墨玉","emoji":"⚫","desc":"深邃神秘，情绪浓烈，独立且富有敏感度。","dims":{"rationality":5,"empathy":2,"creativity":1,"stability":0,"energy":0,"independence":3,"sensitivity":3}},
+  {"id":"qingtong","name":"青铜","emoji":"🟤","desc":"古老而坚韧，责任感强，理智中带有果断。","dims":{"rationality":4,"empathy":0,"creativity":2,"stability":1,"energy":5,"independence":0,"sensitivity":5}},
+  {"id":"chijin2","name":"赤瑾","emoji":"🔴","desc":"真挚热烈，情感饱满，富有感染力。","dims":{"rationality":2,"empathy":2,"creativity":2,"stability":2,"energy":5,"independence":1,"sensitivity":3}},
+  {"id":"lantianshi","name":"蓝田石","emoji":"🟦","desc":"温厚宁静，心性平和，擅长安抚他人。","dims":{"rationality":1,"empathy":2,"creativity":5,"stability":1,"energy":1,"independence":1,"sensitivity":3}},
+  {"id":"yaoshi","name":"曜石","emoji":"⬛","desc":"直觉敏锐，内心深藏力量，善于看透人性。","dims":{"rationality":1,"empathy":2,"creativity":1,"stability":0,"energy":4,"independence":0,"sensitivity":2}},
+  {"id":"lingsha","name":"灵砂","emoji":"✨","desc":"流转如梦，思维跳跃，富有想象与创造力。","dims":{"rationality":1,"empathy":4,"creativity":5,"stability":4,"energy":0,"independence":5,"sensitivity":4}}
+]

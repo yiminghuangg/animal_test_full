@@ -1,11 +1,11 @@
 // 评分与归类工具（维度数量自适应：支持5维或7维）
-// 使用方式：window.Scoring.nearestAnimal(Tscores, animals)
-// Tscores: {维度...} 的标准化分数（建议T分 0-100），animals: 从 animals.json 读取
+// 使用方式：window.Scoring.nearestGem(Tscores, gems)
+// Tscores: {维度...} 的标准化分数（建议T分 0-100），gems: 从 gems.json 读取
 
 (function(){
-  function getKeysFrom(Tscores, animals){
+  function getKeysFrom(Tscores, gems){
     if(Tscores) return Object.keys(Tscores);
-    if(animals && animals.length && animals[0].dims) return Object.keys(animals[0].dims);
+    if(gems && gems.length && gems[0].dims) return Object.keys(gems[0].dims);
     return ['O','C','E','A','N'];
   }
 
@@ -16,16 +16,21 @@
     return dot / (Math.sqrt(na)*Math.sqrt(nb));
   }
 
-  function nearestAnimal(Tscores, animals){
-    const keys = getKeysFrom(Tscores, animals);
+  function nearestGem(Tscores, gems){
+    const keys = getKeysFrom(Tscores, gems);
     let best = null, bestSim = -Infinity, second=null, secondSim=-Infinity;
-    for(const item of animals){
+    for(const item of gems){
       const sim = cosineSimilarity(Tscores, item.dims, keys);
       if(sim > bestSim){ second = best; secondSim = bestSim; best = item; bestSim = sim; }
       else if(sim > secondSim){ second = item; secondSim = sim; }
     }
     const mixed = (bestSim - secondSim) < 0.03 ? `${best?.name||''}-${second?.name||''}` : (best?.name||'');
     return {best, second, bestSim, secondSim, type: mixed};
+  }
+
+  // Keep the old function for backward compatibility
+  function nearestAnimal(Tscores, animals) {
+    return nearestGem(Tscores, animals);
   }
 
   function tScore(scores, norm){
@@ -42,6 +47,12 @@
     return res;
   }
 
-  window.Scoring = { cosineSimilarity, nearestAnimal, tScore };
+  window.Scoring = {
+    cosineSimilarity,
+    nearestGem,
+    nearestAnimal, // backward compatibility
+    tScore
+  };
 })();
+
 

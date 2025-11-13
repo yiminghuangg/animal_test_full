@@ -1,0 +1,602 @@
+[
+  {
+    "id": 1,
+    "question": "如果将世界比作一片广袤无垠、尚未探明的“深海”，你更接近？",
+    "options": [
+      {"text": "海洋本身，能感知最微弱的洋流与生命回响。", "weights": {"empathy": 5}},
+      {"text": "海底的热泉，滋养着奇异生物，吸引它们聚集。", "weights": {"energy": 4}},
+      {"text": "一艘沉没的古船，满载着无人知晓的往事与秘密。", "weights": {"sensitivity": 5}},
+      {"text": "一只自由的鲸，独自巡游，不受固定航线束缚。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 2,
+    "question": "当夜色降临、万籁俱寂时，你更倾向于——",
+    "options": [
+      {"text": "点一盏灯，继续思考尚未解开的问题。", "weights": {"rationality": 4}},
+      {"text": "静听风声，感受夜的呼吸。", "weights": {"sensitivity": 5}},
+      {"text": "打开音乐，与自己的思绪共舞。", "weights": {"creativity": 5}},
+      {"text": "沉入梦境，不再思索。", "weights": {"stability": 4}}
+    ]
+  },
+  {
+    "id": 3,
+    "question": "面对突如其来的风暴，你会——",
+    "options": [
+      {"text": "站在风口，冷静分析风的方向。", "weights": {"rationality": 5}},
+      {"text": "感受风的力量，顺势而动。", "weights": {"energy": 4}},
+      {"text": "护住同行的人，不让他们被卷走。", "weights": {"empathy": 5}},
+      {"text": "退入山洞，等待风平浪静。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 4,
+    "question": "若你手中有一面镜子，能映照出“真实的自我”，你会——",
+    "options": [
+      {"text": "凝视其中，想看清自己的每一道纹理。", "weights": {"rationality": 4}},
+      {"text": "轻轻转身，不愿被完全揭露。", "weights": {"sensitivity": 5}},
+      {"text": "将镜子递给他人，希望他们先看自己。", "weights": {"empathy": 5}},
+      {"text": "打碎镜子，让碎片折射出万千可能。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 5,
+    "question": "在一次久违的重逢中，你最可能说的第一句话是——",
+    "options": [
+      {"text": "“好久不见，最近在忙什么？”", "weights": {"rationality": 3}},
+      {"text": "“我真的很想你。”", "weights": {"empathy": 5}},
+      {"text": "“我们上次分别时的那场雨，还记得吗？”", "weights": {"sensitivity": 4}},
+      {"text": "“你变了，但这很好。”", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 6,
+    "question": "当你凝望星空时，脑海中浮现的是——",
+    "options": [
+      {"text": "星体的运行轨迹与宇宙规律。", "weights": {"rationality": 5}},
+      {"text": "远方未见的生命，是否也在凝望此刻。", "weights": {"empathy": 4}},
+      {"text": "想象自己坠入星海，与光同行。", "weights": {"creativity": 5}},
+      {"text": "无念，只是感到宁静。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 7,
+    "question": "若你是一种自然元素，你更像——",
+    "options": [
+      {"text": "山，稳重而不易动摇。", "weights": {"stability": 5}},
+      {"text": "水，随形而变，包容万物。", "weights": {"empathy": 5}},
+      {"text": "风，轻盈而自由。", "weights": {"independence": 5}},
+      {"text": "火，燃烧自己，照亮他人。", "weights": {"energy": 5}}
+    ]
+  },
+  {
+    "id": 8,
+    "question": "在众人议论纷纷时，你通常——",
+    "options": [
+      {"text": "倾听各方，冷静思考。", "weights": {"rationality": 4}},
+      {"text": "察觉情绪，安抚不安的声音。", "weights": {"empathy": 5}},
+      {"text": "提出独特观点，带来新思路。", "weights": {"creativity": 5}},
+      {"text": "静默旁观，不被扰动。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 9,
+    "question": "一位旅人邀你同行，前方的路未知，你会——",
+    "options": [
+      {"text": "问清目的地与路线再决定。", "weights": {"rationality": 5}},
+      {"text": "出发吧，未知才有趣。", "weights": {"energy": 5}},
+      {"text": "带上他可能忽略的干粮与地图。", "weights": {"empathy": 4}},
+      {"text": "拒绝同行，我有自己的方向。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 10,
+    "question": "若你的心是一座花园，此刻其中盛开的花是——",
+    "options": [
+      {"text": "莲，静中见悟。", "weights": {"stability": 5}},
+      {"text": "玫瑰，带刺却艳丽。", "weights": {"sensitivity": 5}},
+      {"text": "紫藤，垂落梦境，缠绵生香。", "weights": {"empathy": 5}},
+      {"text": "曼陀罗，神秘而充满力量。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 11,
+    "question": "当你听到“命运”二字时，心中浮现的是——",
+    "options": [
+      {"text": "一条既定的河流，无法逆行。", "weights": {"stability": 5}},
+      {"text": "一张可改写的画卷。", "weights": {"creativity": 5}},
+      {"text": "人与人交织的因果线。", "weights": {"empathy": 4}},
+      {"text": "一道虚无的幻象，不过心的投影。", "weights": {"rationality": 5}}
+    ]
+  },
+  {
+    "id": 12,
+    "question": "若能选择一种时刻永恒，你会定格在——",
+    "options": [
+      {"text": "思考的瞬间，一切清晰明朗。", "weights": {"rationality": 4}},
+      {"text": "拥抱的温度，心跳共鸣。", "weights": {"empathy": 5}},
+      {"text": "创造完成的那一刻。", "weights": {"creativity": 5}},
+      {"text": "黄昏时分，安然无声。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 13,
+    "question": "你如何看待孤独？",
+    "options": [
+      {"text": "孤独是通往自我洞见的门。", "weights": {"rationality": 5}},
+      {"text": "孤独是需要被拥抱的存在。", "weights": {"empathy": 5}},
+      {"text": "孤独是创造的燃料。", "weights": {"creativity": 5}},
+      {"text": "孤独是生命的常态。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 14,
+    "question": "你更倾向的表达方式是——",
+    "options": [
+      {"text": "理性分析、条理清晰。", "weights": {"rationality": 5}},
+      {"text": "情感真挚、温柔动人。", "weights": {"empathy": 5}},
+      {"text": "象征隐喻、诗意表达。", "weights": {"creativity": 5}},
+      {"text": "沉默微笑、以心传意。", "weights": {"sensitivity": 5}}
+    ]
+  },
+  {
+    "id": 15,
+    "question": "你在旅途中更喜欢——",
+    "options": [
+      {"text": "规划行程、掌握节奏。", "weights": {"rationality": 4}},
+      {"text": "随遇而安、感受沿途风景。", "weights": {"stability": 5}},
+      {"text": "拍照记录每一个特别瞬间。", "weights": {"creativity": 4}},
+      {"text": "与路人交谈，听他们的故事。", "weights": {"empathy": 5}}
+    ]
+  },
+  {
+    "id": 16,
+    "question": "若要用一句话形容你的人生观——",
+    "options": [
+      {"text": "世界有规律，命运有逻辑。", "weights": {"rationality": 5}},
+      {"text": "人生如梦，各有因缘。", "weights": {"stability": 4}},
+      {"text": "心生光，则万物明。", "weights": {"empathy": 5}},
+      {"text": "破界者，方能自由。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 17,
+    "question": "当你遇到无法理解的人时，你会——",
+    "options": [
+      {"text": "理性分析其动机。", "weights": {"rationality": 4}},
+      {"text": "试着理解他的感受。", "weights": {"empathy": 5}},
+      {"text": "用幽默化解隔阂。", "weights": {"creativity": 5}},
+      {"text": "不理会，尊重差异。", "weights": {"independence": 4}}
+    ]
+  },
+  {
+    "id": 18,
+    "question": "当一段关系结束，你会——",
+    "options": [
+      {"text": "分析原因，寻找规律。", "weights": {"rationality": 5}},
+      {"text": "保留回忆，不忘温度。", "weights": {"sensitivity": 4}},
+      {"text": "创作些什么纪念那段时光。", "weights": {"creativity": 5}},
+      {"text": "果断离开，向前看。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 19,
+    "question": "若你能获得一种超能力，你希望是——",
+    "options": [
+      {"text": "洞察真相，看穿伪装。", "weights": {"rationality": 5}},
+      {"text": "感知他人的情绪。", "weights": {"empathy": 5}},
+      {"text": "操控梦境，创造世界。", "weights": {"creativity": 5}},
+      {"text": "隔绝干扰，保持宁静。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 20,
+    "question": "若你的心是一面湖，它此刻的状态是——",
+    "options": [
+      {"text": "风平浪静，倒映山影。", "weights": {"stability": 5}},
+      {"text": "泛起微澜，暗藏思绪。", "weights": {"sensitivity": 4}},
+      {"text": "星光坠入，泛起灵感的光。", "weights": {"creativity": 5}},
+      {"text": "波涛起伏，充满生命力。", "weights": {"energy": 5}}
+    ]
+  },
+  {
+    "id": 21,
+    "question": "当你走在雾气弥漫的清晨，你更在意——",
+    "options": [
+      {"text": "风的方向与湿度。", "weights": {"rationality": 4}},
+      {"text": "雾中若隐若现的轮廓。", "weights": {"sensitivity": 5}},
+      {"text": "那种被世界包裹的宁静感。", "weights": {"stability": 5}},
+      {"text": "阳光穿透雾气的那一刻。", "weights": {"energy": 5}}
+    ]
+  },
+  {
+    "id": 22,
+    "question": "你更像哪一种时间？",
+    "options": [
+      {"text": "黎明，理智而充满秩序。", "weights": {"rationality": 5}},
+      {"text": "午后，柔和而安然。", "weights": {"stability": 5}},
+      {"text": "黄昏，带着诗意与怀旧。", "weights": {"sensitivity": 5}},
+      {"text": "子夜，灵感最盛之时。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 23,
+    "question": "当你看到一朵花凋零，你的第一反应是——",
+    "options": [
+      {"text": "这是自然循环的结果。", "weights": {"rationality": 5}},
+      {"text": "为它感到一丝怜惜。", "weights": {"empathy": 5}},
+      {"text": "想象花魂将去往何方。", "weights": {"creativity": 5}},
+      {"text": "默然接受，继续前行。", "weights": {"stability": 4}}
+    ]
+  },
+  {
+    "id": 24,
+    "question": "若能选择一种生命形式再生，你希望成为——",
+    "options": [
+      {"text": "一棵古树，静观四季流转。", "weights": {"stability": 5}},
+      {"text": "一只候鸟，随风迁徙。", "weights": {"independence": 5}},
+      {"text": "一条溪流，滋养万物。", "weights": {"empathy": 4}},
+      {"text": "一团火焰，燃尽自己。", "weights": {"energy": 5}}
+    ]
+  },
+  {
+    "id": 25,
+    "question": "当你感到疲惫时，你倾向——",
+    "options": [
+      {"text": "分析原因并调整节奏。", "weights": {"rationality": 4}},
+      {"text": "安静待着，什么也不做。", "weights": {"stability": 5}},
+      {"text": "找朋友聊一聊。", "weights": {"empathy": 5}},
+      {"text": "做点创意的事，让心重新燃起。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 26,
+    "question": "如果“命运”是一首曲子，你希望自己是——",
+    "options": [
+      {"text": "谱曲的人。", "weights": {"creativity": 5}},
+      {"text": "倾听的人。", "weights": {"empathy": 5}},
+      {"text": "演奏的人。", "weights": {"energy": 4}},
+      {"text": "沉默的旁观者。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 27,
+    "question": "当你面对一件未知的事物时，你更可能——",
+    "options": [
+      {"text": "研究原理与规律。", "weights": {"rationality": 5}},
+      {"text": "凭直觉去尝试。", "weights": {"creativity": 4}},
+      {"text": "先观察他人如何应对。", "weights": {"stability": 5}},
+      {"text": "主动掌控，让自己成为主导者。", "weights": {"energy": 5}}
+    ]
+  },
+  {
+    "id": 28,
+    "question": "若你是一种声音，你更像——",
+    "options": [
+      {"text": "钟声，稳而有节奏。", "weights": {"stability": 5}},
+      {"text": "风铃，因风而鸣。", "weights": {"sensitivity": 5}},
+      {"text": "浪涛，汹涌澎湃。", "weights": {"energy": 5}},
+      {"text": "箫声，孤独而悠远。", "weights": {"creativity": 4}}
+    ]
+  },
+  {
+    "id": 29,
+    "question": "若生活是一场棋局，你希望自己是——",
+    "options": [
+      {"text": "棋手，掌控全局。", "weights": {"rationality": 5}},
+      {"text": "棋子，随命运起落。", "weights": {"stability": 4}},
+      {"text": "观棋者，洞悉胜负之外的意境。", "weights": {"sensitivity": 5}},
+      {"text": "破局者，自创规则。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 30,
+    "question": "你认为“力量”的本质是——",
+    "options": [
+      {"text": "清醒地看透一切。", "weights": {"rationality": 5}},
+      {"text": "保护所珍惜之人。", "weights": {"empathy": 5}},
+      {"text": "坚持自我，不被动摇。", "weights": {"independence": 5}},
+      {"text": "能柔能刚，顺势而为。", "weights": {"stability": 4}}
+    ]
+  },
+  {
+    "id": 31,
+    "question": "当你望向远山，你更被吸引的是——",
+    "options": [
+      {"text": "山体的脉络与形势。", "weights": {"rationality": 4}},
+      {"text": "山间的雾气与光影。", "weights": {"sensitivity": 5}},
+      {"text": "登上山巅的征服感。", "weights": {"energy": 5}},
+      {"text": "那种不言而喻的静默。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 32,
+    "question": "当你看一幅抽象画，你首先想到——",
+    "options": [
+      {"text": "画家的情绪与内心。", "weights": {"empathy": 4}},
+      {"text": "色彩的搭配与构图逻辑。", "weights": {"rationality": 5}},
+      {"text": "作品背后的象征意义。", "weights": {"creativity": 5}},
+      {"text": "作品带给自己的宁静。", "weights": {"stability": 4}}
+    ]
+  },
+  {
+    "id": 33,
+    "question": "当你与他人意见不合时，你通常——",
+    "options": [
+      {"text": "冷静分析，提出依据。", "weights": {"rationality": 5}},
+      {"text": "尝试理解对方的感受。", "weights": {"empathy": 5}},
+      {"text": "用幽默化解僵局。", "weights": {"creativity": 4}},
+      {"text": "选择沉默，不再争辩。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 34,
+    "question": "你更喜欢的天气是——",
+    "options": [
+      {"text": "晴空万里，光亮通透。", "weights": {"energy": 5}},
+      {"text": "细雨朦胧，含蓄温柔。", "weights": {"sensitivity": 5}},
+      {"text": "雪落无声，天地一色。", "weights": {"stability": 5}},
+      {"text": "变幻莫测的雷暴天。", "weights": {"creativity": 4}}
+    ]
+  },
+  {
+    "id": 35,
+    "question": "当一个计划被打乱，你的反应是——",
+    "options": [
+      {"text": "重新评估并制定新方案。", "weights": {"rationality": 5}},
+      {"text": "随遇而安，不强求。", "weights": {"stability": 5}},
+      {"text": "转而寻找新的灵感。", "weights": {"creativity": 5}},
+      {"text": "感到被干扰，但很快恢复动力。", "weights": {"energy": 4}}
+    ]
+  },
+  {
+    "id": 36,
+    "question": "若人生是一条河，你希望自己是——",
+    "options": [
+      {"text": "顺流而下，稳而不断。", "weights": {"stability": 5}},
+      {"text": "溯流而上，不惧逆境。", "weights": {"energy": 5}},
+      {"text": "流入他人心湖，带去清凉。", "weights": {"empathy": 5}},
+      {"text": "源头的那滴雪融水，纯粹而自由。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 37,
+    "question": "当你听到古琴声时，你更感受到——",
+    "options": [
+      {"text": "音律的和谐与秩序。", "weights": {"rationality": 4}},
+      {"text": "心被拨动的柔软与回响。", "weights": {"sensitivity": 5}},
+      {"text": "想象山水间的意境。", "weights": {"creativity": 5}},
+      {"text": "一种无声的安宁。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 38,
+    "question": "当你面对选择，你更信任——",
+    "options": [
+      {"text": "理性判断与逻辑推演。", "weights": {"rationality": 5}},
+      {"text": "内心的直觉与感受。", "weights": {"sensitivity": 5}},
+      {"text": "天时与机缘的流动。", "weights": {"creativity": 4}},
+      {"text": "平衡与中庸之道。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 39,
+    "question": "若梦境能映照真实，你希望梦见——",
+    "options": [
+      {"text": "未完成的目标已然实现。", "weights": {"rationality": 4}},
+      {"text": "与久别之人再次相见。", "weights": {"empathy": 5}},
+      {"text": "从未存在的奇幻之地。", "weights": {"creativity": 5}},
+      {"text": "一片空白，万念俱寂。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 40,
+    "question": "当你看到流星划过时，你更想——",
+    "options": [
+      {"text": "许愿，希望成真。", "weights": {"sensitivity": 4}},
+      {"text": "记录下那一瞬的轨迹。", "weights": {"rationality": 4}},
+      {"text": "捕捉灵感，写成一首诗。", "weights": {"creativity": 5}},
+      {"text": "只是静静看着它坠入夜空。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 41,
+    "question": "在群体中，你更常是——",
+    "options": [
+      {"text": "组织者与决策者。", "weights": {"energy": 5}},
+      {"text": "倾听者与调和者。", "weights": {"empathy": 5}},
+      {"text": "沉思者与观察者。", "weights": {"stability": 5}},
+      {"text": "灵感突现的提议者。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 42,
+    "question": "你更在意哪一种“自由”？",
+    "options": [
+      {"text": "思想不被框架束缚。", "weights": {"creativity": 5}},
+      {"text": "行动不被他人左右。", "weights": {"independence": 5}},
+      {"text": "情绪能自然流动。", "weights": {"empathy": 5}},
+      {"text": "内心平静而自持。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 43,
+    "question": "当你被误解时，你的反应是——",
+    "options": [
+      {"text": "解释清楚，理性应对。", "weights": {"rationality": 4}},
+      {"text": "让时间证明一切。", "weights": {"stability": 5}},
+      {"text": "感到受伤却不辩解。", "weights": {"sensitivity": 5}},
+      {"text": "将情绪化为创作的动力。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 44,
+    "question": "你对“命中注定”这句话的态度是——",
+    "options": [
+      {"text": "半信半疑，一切仍可改变。", "weights": {"rationality": 5}},
+      {"text": "深信其中有更大的安排。", "weights": {"stability": 4}},
+      {"text": "把它当作一种浪漫的解释。", "weights": {"sensitivity": 5}},
+      {"text": "命运？我自己书写。", "weights": {"independence": 5}}
+    ]
+  },
+  {
+    "id": 45,
+    "question": "若时间是一条河，你希望自己处在哪一段？",
+    "options": [
+      {"text": "源头，充满未知与可能。", "weights": {"creativity": 5}},
+      {"text": "中游，水势平稳有度。", "weights": {"stability": 5}},
+      {"text": "下游，奔流入海，完成使命。", "weights": {"energy": 4}},
+      {"text": "河外，俯瞰整个流向。", "weights": {"rationality": 5}}
+    ]
+  },
+  {
+    "id": 46,
+    "question": "你认为人与自然的关系是——",
+    "options": [
+      {"text": "共感共生。", "weights": {"empathy": 5}},
+      {"text": "互相观察与学习。", "weights": {"rationality": 4}},
+      {"text": "对话与艺术的源泉。", "weights": {"creativity": 5}},
+      {"text": "自然即我，我即自然。", "weights": {"sensitivity": 5}}
+    ]
+  },
+  {
+    "id": 47,
+    "question": "当一个计划失败，你更看重——",
+    "options": [
+      {"text": "经验与教训。", "weights": {"rationality": 5}},
+      {"text": "过程中与人的联系。", "weights": {"empathy": 5}},
+      {"text": "是否保持了初心。", "weights": {"stability": 4}},
+      {"text": "能否衍生新的可能。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 48,
+    "question": "若你拥有一盏心灯，它会——",
+    "options": [
+      {"text": "照亮他人。", "weights": {"empathy": 5}},
+      {"text": "只照自己。", "weights": {"independence": 5}},
+      {"text": "忽明忽暗，随心而动。", "weights": {"sensitivity": 5}},
+      {"text": "长明不灭，安定如初。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 49,
+    "question": "在你看来，“真相”的样子是——",
+    "options": [
+      {"text": "冷静、无情，却不可否认。", "weights": {"rationality": 5}},
+      {"text": "因人而异，带着温度。", "weights": {"empathy": 5}},
+      {"text": "多维的幻影，没有固定形。", "weights": {"creativity": 5}},
+      {"text": "沉静如石，不言自明。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 50,
+    "question": "你更希望被世界记住为——",
+    "options": [
+      {"text": "一个冷静的思考者。", "weights": {"rationality": 5}},
+      {"text": "一个温柔的倾听者。", "weights": {"empathy": 5}},
+      {"text": "一个创造世界的梦者。", "weights": {"creativity": 5}},
+      {"text": "一个不为外界所动的心者。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 51,
+    "question": "当你看到破碎的器物，你会——",
+    "options": [
+      {"text": "修复它，让它重新完整。", "weights": {"empathy": 5}},
+      {"text": "观察裂痕中的美。", "weights": {"sensitivity": 5}},
+      {"text": "思考破碎背后的原因。", "weights": {"rationality": 5}},
+      {"text": "将碎片重新组合为新形态。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 52,
+    "question": "若一切重新开始，你最想保留的，是——",
+    "options": [
+      {"text": "理性与清醒。", "weights": {"rationality": 5}},
+      {"text": "善意与柔软。", "weights": {"empathy": 5}},
+      {"text": "勇气与冲劲。", "weights": {"energy": 5}},
+      {"text": "宁静与从容。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 53,
+    "question": "你觉得“美”的核心是——",
+    "options": [
+      {"text": "对称与秩序。", "weights": {"rationality": 5}},
+      {"text": "共鸣与情感。", "weights": {"empathy": 5}},
+      {"text": "想象与灵动。", "weights": {"creativity": 5}},
+      {"text": "纯净与空白。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 54,
+    "question": "当世界陷入混乱，你会——",
+    "options": [
+      {"text": "理性分析、寻找逻辑。", "weights": {"rationality": 5}},
+      {"text": "守护身边的人与秩序。", "weights": {"empathy": 5}},
+      {"text": "退入内心的静室。", "weights": {"stability": 5}},
+      {"text": "用创造为世界开一扇窗。", "weights": {"creativity": 5}}
+    ]
+  },
+  {
+    "id": 55,
+    "question": "你相信直觉吗？",
+    "options": [
+      {"text": "它是潜意识的理性结晶。", "weights": {"rationality": 5}},
+      {"text": "它是心的低语，常常准确。", "weights": {"sensitivity": 5}},
+      {"text": "它是灵感的火花。", "weights": {"creativity": 5}},
+      {"text": "它需要被经验平衡。", "weights": {"stability": 4}}
+    ]
+  },
+  {
+    "id": 56,
+    "question": "你觉得“成长”意味着——",
+    "options": [
+      {"text": "更能自控与理智。", "weights": {"rationality": 5}},
+      {"text": "更能感知与共情。", "weights": {"empathy": 5}},
+      {"text": "更能创造与突破。", "weights": {"creativity": 5}},
+      {"text": "更能平和与安然。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 57,
+    "question": "你最希望掌握的能力是——",
+    "options": [
+      {"text": "洞察人心的智慧。", "weights": {"rationality": 5}},
+      {"text": "疗愈他人的能量。", "weights": {"empathy": 5}},
+      {"text": "化虚为实的创造力。", "weights": {"creativity": 5}},
+      {"text": "不动于心的平静力。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 58,
+    "question": "你最害怕失去的是——",
+    "options": [
+      {"text": "理性与清醒。", "weights": {"rationality": 5}},
+      {"text": "感情与连接。", "weights": {"empathy": 5}},
+      {"text": "创造的热情。", "weights": {"creativity": 5}},
+      {"text": "内在的安定。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 59,
+    "question": "你认为灵魂的重量是什么？",
+    "options": [
+      {"text": "记忆与意识。", "weights": {"rationality": 5}},
+      {"text": "情感与牵挂。", "weights": {"empathy": 5}},
+      {"text": "想象与梦。", "weights": {"creativity": 5}},
+      {"text": "宁静与空。", "weights": {"stability": 5}}
+    ]
+  },
+  {
+    "id": 60,
+    "question": "若人生是一场轮回，你希望留下的印记是——",
+    "options": [
+      {"text": "一段思想。", "weights": {"rationality": 5}},
+      {"text": "一次温柔的相遇。", "weights": {"empathy": 5}},
+      {"text": "一件永不褪色的作品。", "weights": {"creativity": 5}},
+      {"text": "一片宁静的湖光。", "weights": {"stability": 5}}
+    ]
+  }
+]
