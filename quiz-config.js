@@ -10,7 +10,7 @@ window.QuizConfig = {
       questionsFile: 'questions.json',
       fallbackData: 'FALLBACK_ANIMALS',
       resultKey: 'animalResult',
-      typeLabel: '动物性格类型',
+      typeLabel: '宝石性格类型',
       scoringMethod: 'nearestAnimal'
     },
     gems: {

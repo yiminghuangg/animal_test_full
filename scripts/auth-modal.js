@@ -99,7 +99,12 @@
       }
     }
 
-    const valid = (cfg.auth && Array.isArray(cfg.auth.validCodes) && cfg.auth.validCodes.map(c=>c.toUpperCase()).includes(code));
+    const valid = (cfg.auth && Array.isArray(cfg.auth.validCodes) && 
+      cfg.auth.validCodes.some(fullCode => {
+        // 支持 "序列号:授权码" 格式，提取授权码部分进行比较
+        const codePart = fullCode.includes(':') ? fullCode.split(':')[1] : fullCode;
+        return codePart.toUpperCase() === code;
+      }));
     if (valid) {
       // 标记为已使用
       if (cfg.auth.allowOneTimeUse && typeof AuthCodeManager !== 'undefined') {
@@ -128,5 +133,6 @@
   // initialize
   init();
 })();
+
 
 
