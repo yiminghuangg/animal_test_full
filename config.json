@@ -37,6 +37,9 @@
       "W1X2Y3Z4", "A5B6C7D8", "E9F0G1H2", "I3J4K5L6", "M7N8O9P0",
       "Q1R2S3T4", "U5V6W7X8", "Y9Z0A1B2", "C3D4E5F6", "G7H8I9J0"
     ],
+    "testCodes": [
+    "TEST001", "TEST002", "TEST003", "DEMO001", "DEMO002"
+    ],
     "expiryMinutes": 30,
     "allowOneTimeUse": true
   }

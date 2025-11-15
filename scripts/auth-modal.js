@@ -104,10 +104,18 @@
         // 支持 "序列号:授权码" 格式，提取授权码部分进行比较
         const codePart = fullCode.includes(':') ? fullCode.split(':')[1] : fullCode;
         return codePart.toUpperCase() === code;
-      }));
+      })) || 
+      // 检查测试码（可重复使用）
+      (cfg.auth && Array.isArray(cfg.auth.testCodes) && 
+       cfg.auth.testCodes.some(testCode => testCode.toUpperCase() === code));
+
     if (valid) {
-      // 标记为已使用
-      if (cfg.auth.allowOneTimeUse && typeof AuthCodeManager !== 'undefined') {
+      // 检查是否为测试码
+      const isTestCode = cfg.auth && Array.isArray(cfg.auth.testCodes) && 
+        cfg.auth.testCodes.some(testCode => testCode.toUpperCase() === code);
+      
+      // 只有非测试码才标记为已使用
+      if (!isTestCode && cfg.auth.allowOneTimeUse && typeof AuthCodeManager !== 'undefined') {
         const authManager = new AuthCodeManager();
         authManager.markAsUsed(code);
       }
@@ -133,6 +141,7 @@
   // initialize
   init();
 })();
+
 
 
 
